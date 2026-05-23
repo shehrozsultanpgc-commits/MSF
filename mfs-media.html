@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MFS Media — Social Growth Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --gold:#C9A84C;
+    --gold-light:#E8C97A;
+    --gold-dim:#7A6028;
+    --black:#080808;
+    --surface:#0E0E0E;
+    --surface2:#161616;
+    --surface3:#1E1E1E;
+    --border:#2A2A2A;
+    --text:#F0EDE6;
+    --muted:#7A7470;
+    --white:#FAFAF8;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.2rem 3rem;
+    background:rgba(8,8,8,0.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(201,168,76,0.12);
+  }
+  .logo{
+    font-family:'Syne',sans-serif;
+    font-weight:800;font-size:1.4rem;letter-spacing:0.12em;
+    color:var(--gold);text-transform:uppercase;
+  }
+  .logo span{color:var(--white);font-weight:400}
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{
+    color:var(--muted);font-size:0.82rem;letter-spacing:0.1em;
+    text-decoration:none;text-transform:uppercase;
+    font-family:'Syne',sans-serif;font-weight:600;
+    transition:color 0.2s;
+  }
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{
+    background:var(--gold);color:var(--black);
+    padding:0.55rem 1.4rem;border:none;cursor:pointer;
+    font-family:'Syne',sans-serif;font-weight:700;
+    font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;
+    border-radius:2px;transition:background 0.2s;text-decoration:none;
+    display:inline-block;
+  }
+  .nav-cta:hover{background:var(--gold-light)}
+
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:8rem 3rem 5rem;
+    position:relative;overflow:hidden;
+  }
+  .hero-grid-bg{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none;
+  }
+  .hero-glow{
+    position:absolute;top:-20%;right:-10%;
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Syne',sans-serif;
+    font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1.5rem;
+    display:flex;align-items:center;gap:0.75rem;
+  }
+  .eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+  h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:300;font-size:clamp(3.5rem,8vw,7rem);
+    line-height:1.0;letter-spacing:-0.02em;
+    color:var(--white);margin-bottom:0.2rem;
+  }
+  h1 em{color:var(--gold);font-style:normal;font-weight:600}
+  .hero-sub{
+    font-size:1.05rem;color:var(--muted);max-width:520px;
+    margin:2rem 0 3rem;line-height:1.8;
+  }
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .btn-primary{
+    background:var(--gold);color:var(--black);
+    padding:0.9rem 2.2rem;border:none;cursor:pointer;
+    font-family:'Syne',sans-serif;font-weight:700;
+    font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;
+    border-radius:2px;transition:all 0.2s;text-decoration:none;display:inline-block;
+  }
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+  .btn-ghost{
+    background:transparent;color:var(--text);
+    padding:0.9rem 2.2rem;border:1px solid var(--border);cursor:pointer;
+    font-family:'Syne',sans-serif;font-weight:600;
+    font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;
+    border-radius:2px;transition:all 0.2s;text-decoration:none;display:inline-block;
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .hero-stats{
+    display:flex;gap:3rem;margin-top:5rem;
+    border-top:1px solid var(--border);padding-top:2.5rem;
+    flex-wrap:wrap;
+  }
+  .stat-num{
+    font-family:'Syne',sans-serif;font-size:2rem;
+    font-weight:800;color:var(--gold);letter-spacing:-0.02em;
+  }
+  .stat-label{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem}
+
+  .marquee-wrap{
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:1.1rem 0;overflow:hidden;
+    background:var(--surface);
+  }
+  .marquee-track{
+    display:flex;gap:3rem;width:max-content;
+    animation:marquee 28s linear infinite;
+  }
+  .marquee-item{
+    font-family:'Syne',sans-serif;
+    font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--muted);white-space:nowrap;
+    display:flex;align-items:center;gap:1rem;
+  }
+  .marquee-item::after{content:'✦';color:var(--gold);font-size:0.6rem}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  section{padding:6rem 3rem}
+  .section-label{
+    font-family:'Syne',sans-serif;
+    font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1rem;
+    display:flex;align-items:center;gap:0.75rem;
+  }
+  .section-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+  h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.2rem,5vw,3.8rem);font-weight:300;
+    line-height:1.1;color:var(--white);margin-bottom:1.5rem;
+  }
+  h2 strong{color:var(--gold);font-weight:600}
+
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1px;background:var(--border);
+    border:1px solid var(--border);
+    margin-top:4rem;
+  }
+  .service-card{
+    background:var(--surface);
+    padding:2.2rem 2rem;
+    transition:background 0.3s;
+  }
+  .service-card:hover{background:var(--surface2)}
+  .service-icon{
+    width:40px;height:40px;
+    border:1px solid var(--gold-dim);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:1.4rem;border-radius:2px;font-size:1.1rem;color:var(--gold);
+  }
+  .service-title{
+    font-family:'Syne',sans-serif;
+    font-size:0.95rem;font-weight:700;
+    letter-spacing:0.05em;color:var(--white);
+    margin-bottom:0.6rem;text-transform:uppercase;
+  }
+  .service-desc{font-size:0.85rem;color:var(--muted);line-height:1.7}
+
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.5rem;margin-top:4rem;
+  }
+  .plan-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:2.5rem 2rem;border-radius:3px;
+    position:relative;transition:border-color 0.3s;
+  }
+  .plan-card:hover{border-color:var(--gold-dim)}
+  .plan-card.featured{background:var(--surface2);border-color:var(--gold);}
+  .plan-badge{
+    position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+    background:var(--gold);color:var(--black);
+    font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:800;
+    letter-spacing:0.15em;text-transform:uppercase;
+    padding:0.35rem 1rem;border-radius:0 0 3px 3px;
+  }
+  .plan-name{
+    font-family:'Syne',sans-serif;font-size:0.78rem;
+    letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:1rem;
+  }
+  .plan-price{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3.2rem;font-weight:600;color:var(--white);
+    line-height:1;margin-bottom:0.3rem;
+  }
+  .plan-price span{font-size:1.2rem;vertical-align:super;font-family:'DM Sans',sans-serif;font-weight:300;color:var(--muted)}
+  .plan-period{font-size:0.8rem;color:var(--muted);margin-bottom:2rem}
+  .plan-features{list-style:none;margin-bottom:2rem}
+  .plan-features li{
+    font-size:0.85rem;color:var(--muted);
+    padding:0.55rem 0;border-bottom:1px solid rgba(42,42,42,0.6);
+    display:flex;align-items:center;gap:0.6rem;
+  }
+  .plan-features li::before{content:'→';color:var(--gold);font-size:0.75rem}
+  .plan-features li.included{color:var(--text)}
+
+  .bio-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .bio-container{
+    max-width:900px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+  }
+  .instagram-mockup{
+    background:var(--black);
+    border:1px solid var(--border);
+    border-radius:16px;padding:2rem;
+  }
+  .ig-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+  .ig-avatar{
+    width:72px;height:72px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--black);flex-shrink:0;
+  }
+  .ig-username{font-weight:700;font-size:1rem;color:var(--white)}
+  .ig-handle{font-size:0.8rem;color:var(--muted)}
+  .ig-stats{display:flex;gap:1.5rem;margin-bottom:1.2rem}
+  .ig-stat{text-align:center}
+  .ig-stat-num{font-weight:700;font-size:0.95rem;color:var(--white)}
+  .ig-stat-lbl{font-size:0.7rem;color:var(--muted)}
+  .ig-bio-text{font-size:0.82rem;line-height:1.6;color:var(--text);margin-bottom:1rem}
+  .ig-bio-link{font-size:0.8rem;color:var(--gold)}
+  .ig-highlights{display:flex;gap:1rem;margin-top:1.2rem;overflow-x:auto}
+  .ig-hl{display:flex;flex-direction:column;align-items:center;gap:0.3rem;flex-shrink:0;}
+  .ig-hl-ring{
+    width:52px;height:52px;border-radius:50%;
+    border:2px solid var(--gold);padding:2px;
+    background:var(--surface3);
+    display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--gold);
+  }
+  .ig-hl-lbl{font-size:0.6rem;color:var(--muted);text-align:center}
+  .bio-copy h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2rem;font-weight:300;color:var(--white);margin-bottom:1rem;
+  }
+  .bio-copy p{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+  .bio-highlight{
+    display:flex;gap:0.5rem;align-items:flex-start;
+    margin-bottom:0.8rem;font-size:0.85rem;color:var(--muted);
+  }
+  .bio-highlight::before{content:'✦';color:var(--gold);font-size:0.6rem;margin-top:0.35rem;flex-shrink:0}
+
+  .strategy-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;
+  }
+  .strat-card{
+    background:var(--surface);border:1px solid var(--border);padding:1.8rem;border-radius:3px;
+  }
+  .strat-num{
+    font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;
+    color:rgba(201,168,76,0.15);line-height:1;margin-bottom:0.5rem;
+  }
+  .strat-title{
+    font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;
+    color:var(--white);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;
+  }
+  .strat-desc{font-size:0.82rem;color:var(--muted);line-height:1.7}
+
+  .results-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--border);border:1px solid var(--border);margin-top:4rem;
+  }
+  .result-cell{background:var(--surface);padding:2rem 1.5rem;text-align:center;}
+  .result-num{
+    font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--gold);line-height:1;
+  }
+  .result-sub{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem}
+
+  .testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+  .testi-card{background:var(--surface);border:1px solid var(--border);padding:2rem;border-radius:3px;}
+  .testi-stars{color:var(--gold);font-size:0.85rem;margin-bottom:1rem;letter-spacing:0.2em}
+  .testi-text{font-size:0.88rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;font-style:italic}
+  .testi-author{
+    display:flex;align-items:center;gap:0.75rem;
+    font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;
+    color:var(--white);text-transform:uppercase;letter-spacing:0.05em;
+  }
+  .testi-avatar{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--surface3);border:1px solid var(--gold-dim);
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.7rem;color:var(--gold);font-family:'Syne',sans-serif;font-weight:700;
+  }
+
+  .cta-section{
+    text-align:center;padding:8rem 3rem;
+    background:var(--surface);border-top:1px solid var(--border);
+    position:relative;overflow:hidden;
+  }
+  .cta-glow{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:500px;height:300px;border-radius:50%;
+    background:radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .cta-section p{color:var(--muted);max-width:480px;margin:0 auto 2.5rem;font-size:0.95rem}
+
+  footer{
+    background:var(--black);border-top:1px solid var(--border);
+    padding:3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  }
+  .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.15em;color:var(--gold);}
+  .footer-links{display:flex;gap:2rem;list-style:none}
+  .footer-links a{font-size:0.8rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+  .footer-links a:hover{color:var(--gold)}
+  .footer-copy{font-size:0.75rem;color:var(--muted);text-align:right}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .nav-links{display:none}
+    section{padding:4rem 1.5rem}
+    .hero{padding:6rem 1.5rem 3rem}
+    .hero-stats{gap:1.5rem}
+    .strategy-grid{grid-template-columns:1fr}
+    .results-row{grid-template-columns:repeat(2,1fr)}
+    .bio-container{grid-template-columns:1fr;gap:2rem}
+    footer{flex-direction:column;text-align:center}
+    .footer-copy{text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">MFS <span>Media</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Get Started</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="eyebrow">Social Growth Agency — Pakistan</div>
+  <h1>Grow Your<br/><em>Presence.</em><br/>Dominate Your Niche.</h1>
+  <p class="hero-sub">MFS Media helps brands, creators, and businesses build powerful social proof, expand their reach, and become the most visible name in their market.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#pricing">Start Growing Today</a>
+    <a class="btn-ghost" href="#results">See Results →</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">500+</div><div class="stat-label">Clients Served</div></div>
+    <div><div class="stat-num">10M+</div><div class="stat-label">Engagements Delivered</div></div>
+    <div><div class="stat-num">98%</div><div class="stat-label">Client Satisfaction</div></div>
+    <div><div class="stat-num">24h</div><div class="stat-label">Delivery Speed</div></div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Instagram Growth</span>
+    <span class="marquee-item">Reel Views</span>
+    <span class="marquee-item">Profile Visibility</span>
+    <span class="marquee-item">Engagement Boost</span>
+    <span class="marquee-item">Brand Awareness</span>
+    <span class="marquee-item">Story Views</span>
+    <span class="marquee-item">Followers Growth</span>
+    <span class="marquee-item">Social Proof</span>
+    <span class="marquee-item">Content Strategy</span>
+    <span class="marquee-item">Organic Reach</span>
+    <span class="marquee-item">Instagram Growth</span>
+    <span class="marquee-item">Reel Views</span>
+    <span class="marquee-item">Profile Visibility</span>
+    <span class="marquee-item">Engagement Boost</span>
+    <span class="marquee-item">Brand Awareness</span>
+    <span class="marquee-item">Story Views</span>
+    <span class="marquee-item">Followers Growth</span>
+    <span class="marquee-item">Social Proof</span>
+    <span class="marquee-item">Content Strategy</span>
+    <span class="marquee-item">Organic Reach</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="section-label">What We Offer</div>
+  <h2>Every Service You Need<br/>To <strong>Scale Online</strong></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">👥</div>
+      <div class="service-title">Followers Growth</div>
+      <div class="service-desc">Real-looking, high-retention followers that build your profile authority and social proof instantly.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">❤️</div>
+      <div class="service-title">Likes & Reactions</div>
+      <div class="service-desc">Boost post engagement signals so Instagram's algorithm pushes your content further organically.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎬</div>
+      <div class="service-title">Reel Views</div>
+      <div class="service-desc">Supercharge your Reels performance. More views trigger the explore page and viral growth loops.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👁️</div>
+      <div class="service-title">Story Views</div>
+      <div class="service-desc">Stay at the top of your followers' feeds with consistently high story view counts.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔁</div>
+      <div class="service-title">Shares & Reposts</div>
+      <div class="service-desc">Amplify your content reach through shares that signal high relevance and value to Instagram.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <div class="service-title">Profile Analytics</div>
+      <div class="service-desc">Detailed reporting on your growth, reach, and engagement metrics every week.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✍️</div>
+      <div class="service-title">Content Strategy</div>
+      <div class="service-desc">Tailored content roadmaps including posting schedules, caption templates, and hashtag strategies.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚀</div>
+      <div class="service-title">Brand Visibility</div>
+      <div class="service-desc">Comprehensive campaigns designed to make your brand impossible to ignore in your niche.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <div class="service-title">Outreach & Collab</div>
+      <div class="service-desc">DM outreach strategies and influencer collaboration guidance to accelerate community growth.</div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-label">Transparent Packages</div>
+  <h2>Simple Pricing.<br/><strong>Powerful Results.</strong></h2>
+  <div class="pricing-grid">
+    <div class="plan-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><span>$</span>29</div>
+      <div class="plan-period">one-time boost</div>
+      <ul class="plan-features">
+        <li class="included">1,000 Followers</li>
+        <li class="included">500 Likes per post (×3)</li>
+        <li class="included">5,000 Reel Views</li>
+        <li>Story Views Package</li>
+        <li>Content Strategy Guide</li>
+        <li>Priority Support</li>
+      </ul>
+      <a class="btn-ghost" style="width:100%;text-align:center" href="#contact">Order Now →</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-price"><span>$</span>79</div>
+      <div class="plan-period">monthly plan</div>
+      <ul class="plan-features">
+        <li class="included">5,000 Followers</li>
+        <li class="included">2,000 Likes per post (×10)</li>
+        <li class="included">50,000 Reel Views</li>
+        <li class="included">Story Views Package</li>
+        <li class="included">Content Strategy Guide</li>
+        <li>Priority Support</li>
+      </ul>
+      <a class="btn-primary" style="width:100%;text-align:center" href="#contact">Get Started →</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price"><span>$</span>199</div>
+      <div class="plan-period">monthly plan</div>
+      <ul class="plan-features">
+        <li class="included">20,000 Followers</li>
+        <li class="included">Unlimited Likes & Views</li>
+        <li class="included">200,000+ Reel Views</li>
+        <li class="included">Full Engagement Suite</li>
+        <li class="included">1-on-1 Content Strategy</li>
+        <li class="included">Priority 24/7 Support</li>
+      </ul>
+      <a class="btn-ghost" style="width:100%;text-align:center" href="#contact">Order Elite →</a>
+    </div>
+  </div>
+</section>
+
+<section class="bio-section">
+  <div class="bio-container">
+    <div class="instagram-mockup">
+      <div class="ig-header">
+        <div class="ig-avatar">MFS</div>
+        <div>
+          <div class="ig-username">mfsmediaagency</div>
+          <div class="ig-handle">MFS Growth</div>
+        </div>
+      </div>
+      <div class="ig-stats">
+        <div class="ig-stat"><div class="ig-stat-num">247</div><div class="ig-stat-lbl">Posts</div></div>
+        <div class="ig-stat"><div class="ig-stat-num">18.4K</div><div class="ig-stat-lbl">Followers</div></div>
+        <div class="ig-stat"><div class="ig-stat-num">500+</div><div class="ig-stat-lbl">Clients</div></div>
+      </div>
+      <div class="ig-bio-text">
+        📈 <strong style="color:var(--white)">Social Growth Agency</strong><br/>
+        🚀 We grow brands, creators & businesses<br/>
+        💎 Instagram · Followers · Reels · Engagement<br/>
+        📩 DM for custom packages & collabs<br/>
+        ⚡ Results in 24–48 hours
+      </div>
+      <div class="ig-highlights">
+        <div class="ig-hl"><div class="ig-hl-ring">💰</div><div class="ig-hl-lbl">Pricing</div></div>
+        <div class="ig-hl"><div class="ig-hl-ring">⭐</div><div class="ig-hl-lbl">Reviews</div></div>
+        <div class="ig-hl"><div class="ig-hl-ring">📊</div><div class="ig-hl-lbl">Results</div></div>
+        <div class="ig-hl"><div class="ig-hl-ring">❓</div><div class="ig-hl-lbl">FAQs</div></div>
+        <div class="ig-hl"><div class="ig-hl-ring">📞</div><div class="ig-hl-lbl">Contact</div></div>
+      </div>
+    </div>
+    <div class="bio-copy">
+      <div class="section-label">Instagram Profile</div>
+      <h3>Your Instagram page should sell before you say a word.</h3>
+      <p>We design your entire Instagram presence to convert visitors into clients — from your bio to your story highlights to your content grid.</p>
+      <div class="bio-highlight">Strong keyword-rich bio that ranks in Instagram search</div>
+      <div class="bio-highlight">Story highlights for pricing, results, testimonials & FAQs</div>
+      <div class="bio-highlight">Consistent gold & black branded grid aesthetic</div>
+      <div class="bio-highlight">Clear DM call-to-action that converts followers to buyers</div>
+      <div class="bio-highlight">Verified-looking profile that builds instant trust</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Growth Blueprint</div>
+  <h2>Your Daily Strategy<br/>For <strong>Viral Growth</strong></h2>
+  <div class="strategy-grid">
+    <div class="strat-card">
+      <div class="strat-num">01</div>
+      <div class="strat-title">Short-Form Video</div>
+      <div class="strat-desc">Post 1–2 Reels daily using trending audio, hook formulas, and visual storytelling that stops the scroll.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">02</div>
+      <div class="strat-title">Social Proof Content</div>
+      <div class="strat-desc">Share client results, screenshots, testimonials, and before/after stats to build trust with cold audiences.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">03</div>
+      <div class="strat-title">Educational Tips</div>
+      <div class="strat-desc">Free value content: Instagram algorithm tips, growth hacks, and marketing education that positions you as an authority.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">04</div>
+      <div class="strat-title">DM Outreach</div>
+      <div class="strat-desc">Systematic cold DM strategy targeting new businesses, influencers, and brands in your niche daily.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">05</div>
+      <div class="strat-title">Trend Hijacking</div>
+      <div class="strat-desc">Adapt viral trends to your niche within 24 hours of them emerging for maximum organic reach.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-num">06</div>
+      <div class="strat-title">Paid Ads Scale</div>
+      <div class="strat-desc">Once organic is working, deploy targeted Meta Ads to scale leads and visibility to new markets.</div>
+    </div>
+  </div>
+</section>
+
+<section id="results" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-label">Proven Impact</div>
+  <h2>Numbers That<br/><strong>Speak Loudly</strong></h2>
+  <div class="results-row">
+    <div class="result-cell"><div class="result-num">10M+</div><div class="result-sub">Total Engagements Delivered</div></div>
+    <div class="result-cell"><div class="result-num">500+</div><div class="result-sub">Brands & Creators Grown</div></div>
+    <div class="result-cell"><div class="result-num">24hrs</div><div class="result-sub">Average Delivery Time</div></div>
+    <div class="result-cell"><div class="result-num">98%</div><div class="result-sub">Client Satisfaction Rate</div></div>
+  </div>
+  <div class="testimonial-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"My clothing brand went from 200 to 8,000 followers in 3 weeks. The engagement on my Reels completely changed — the algorithm started pushing my content organically too."</div>
+      <div class="testi-author"><div class="testi-avatar">AR</div>Ahmad R. — Clothing Brand</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"As a restaurant in Islamabad, I had no online presence. MFS Media built our page from zero. We now get DMs for reservations from Instagram every single week."</div>
+      <div class="testi-author"><div class="testi-avatar">SK</div>Sara K. — Restaurant Owner</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"I was a micro-influencer stuck at 1,200 followers for a year. After one month with MFS, I crossed 12K and got my first brand deal. Muhammad Shehroz delivers real results."</div>
+      <div class="testi-author"><div class="testi-avatar">ZM</div>Zara M. — Content Creator</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="section-label" style="justify-content:center;margin-bottom:1.5rem">Ready to Scale?</div>
+  <h2>Your Growth Starts<br/><strong>Today.</strong></h2>
+  <p>Join 500+ brands and creators who trust MFS Media to build their online presence. First results within 24 hours.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <a class="btn-primary" href="https://wa.me/923015323689" target="_blank">Order a Package →</a>
+    <a class="btn-ghost" href="https://www.instagram.com/mfsmediaagency" target="_blank">DM Us on Instagram</a>
+  </div>
+  <div style="margin-top:3rem;font-size:0.8rem;color:var(--muted)">
+    📩 mfsmedia.agency@gmail.com &nbsp;·&nbsp; 📲 WhatsApp available &nbsp;·&nbsp; ⚡ Fast response guaranteed
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MFS MEDIA</div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">
+    © 2025 MFS Media · Muhammad Shehroz Sultan<br/>
+    <span style="font-size:0.68rem;color:var(--muted)">Rawalpindi, Pakistan</span>
+  </div>
+</footer>
+
+</body>
+</html>
